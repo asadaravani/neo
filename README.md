@@ -1,6 +1,6 @@
 # neobis_ 
 ### Implementation of Neobis tasks
-![neobisIMG](https://github.com/asadaravani/neo/assets/134205232/9424e826-ad69-4d54-9e6a-db67b75a1acd)
+![neobisIMG](https://developers.redhat.com/sites/default/files/styles/share/public/ST-java1_2x.png?itok=LP1xR4KL)
 ---
 ### Study plan:
 **Week 1**
