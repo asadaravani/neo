@@ -14,3 +14,5 @@ public class Gerating(){
    }
 }
 ```
+- `author` - Asadbek Beganov
+- `date` - The date of creation `2024-02-27 18:20:00`
