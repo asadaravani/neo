@@ -7,6 +7,5 @@ import java.util.Collection;
 @Repository
 interface ProductRepository extends JpaRepository<Product, Long> {
 
-    Collection<Product> findByProductName(String productName);
 
 }

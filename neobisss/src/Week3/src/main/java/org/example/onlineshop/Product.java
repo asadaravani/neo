@@ -19,7 +19,7 @@ public class Product {
 
     public Product() {}
 
-    public long getProductId() {
+    public long getId() {
         return id;
     }
 
