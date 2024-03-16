@@ -8,6 +8,13 @@
 - solved ps
 - learning using git command line
 ---
+**Week 2**
+- MySQL using JDBC, Hibernate
+---
+**Week 3**
+- learning using Spring Framework
+- endpoints, testing with Postman
+---
 ```java
 public class Gerating(){
   public static void main(String[] args){
