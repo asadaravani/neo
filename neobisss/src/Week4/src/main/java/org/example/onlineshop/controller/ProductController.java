@@ -1,12 +1,13 @@
 package org.example.onlineshop.controller;
 
-import org.example.onlineshop.dto.ProductDTO;
 import org.example.onlineshop.entity.Product;
 import org.example.onlineshop.service.ProductService;
+import org.example.onlineshop.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class ProductController{
      * @return Product.
      */
     @GetMapping("{id}")
-    public Optional<Product> findProductById(@PathVariable long id){
+    public Optional<Product> findProductById(@PathVariable Long id){
         return productService.findProductById(id);
     }
 
@@ -45,8 +46,8 @@ public class ProductController{
      * @param price       The price of the product.
      */
     @PostMapping
-    public String addProduct(@RequestParam String productName, @RequestParam double price){
-       return productService.addProduct(productName, price);
+    public ResponseEntity<Product> addProduct(@RequestParam String productName, @RequestParam BigDecimal price){
+       return ResponseEntity.ok(productService.addProduct(productName, price));
     }
 
 
@@ -59,29 +60,25 @@ public class ProductController{
      * @body product    The body of the product.
      * @return          A message indicating the success of the add operation.
      */
-    @PostMapping("/addProductBody")
-    public ResponseEntity<String> addProduct2(@RequestBody ProductDTO product){
-        return productService.addProductBody(product);
+    @PostMapping("/addProductByBody")
+    public ResponseEntity<Product> addProduct2(@RequestBody ProductDTO product){
+        return ResponseEntity.ok(productService.addProductBody(product));
     }
 
 
     /**
-     * Update a product by specifying its ID, name and price.
+     * Update a product by specifying its body.
      *
-     * This method updates the details of an existing product identified by the provided ID.
+     * This method updates the details of an existing product identified by the provided body.
      * It sets the new name and price for the product and saves the changes to the DB.
      * It gives respond if product doesn't exist in the DB
      *
-     * @param id          The ID of the product to update.
-     * @param productName The new name of the product.
-     * @param price       The new price of the product.
+     * @param productDTO  product.
      * @return            A message indicating the success of the update operation.
      */
-    @PutMapping("{id}")
-    public ResponseEntity<String> editProductById(@PathVariable long id,
-                                @RequestParam String productName,
-                                @RequestParam double price) {
-        return productService.editProductById(id, productName, price);
+    @PutMapping("/updateProductByBody")
+    public ResponseEntity<Product> editProduct(@RequestBody ProductDTO productDTO) {
+        return ResponseEntity.ok(productService.editProduct(productDTO));
     }
 
 
@@ -96,8 +93,8 @@ public class ProductController{
      * @return   A message indicating the success of the removing of the product.
      */
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteProductById(@PathVariable long id){
-        return productService.deleteProductById(id);
+    public ResponseEntity<String> deleteProductById(@PathVariable Long id){
+        return ResponseEntity.ok().body(productService.deleteProductById(id));
     }
 
 
@@ -109,8 +106,8 @@ public class ProductController{
      * @return A message informs a successful deletion of all products .
      */
     @DeleteMapping("/deleteAll")
-    public String deleteAllProducts(){
-        return productService.deleteAllProducts();
+    public ResponseEntity<String> deleteAllProducts(){
+        return ResponseEntity.ok(productService.deleteAllProducts());
     }
 
 }
