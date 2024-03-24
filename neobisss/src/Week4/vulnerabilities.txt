@@ -8,3 +8,10 @@ Author: Beganov Asadbek
 
 2.  Implemented Password Encoding
     Impact: Avoids exposure of passwords in requests
+
+3.  Application.properties deleted using bfg cleaner
+    Impact: history of the commits doesn't contain sensitive data: password of the local server
+            But it contains application.properties in the last commits
+            The main purpose of deleting was a practice with ```bfg```
+
+

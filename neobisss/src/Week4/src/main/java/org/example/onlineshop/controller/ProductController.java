@@ -30,8 +30,9 @@ public class ProductController{
 
     /**
      * Get products by ID.
+     * This endpoint returns an Optional containing the product, as it may or may not exist
      *
-     * @return Product.
+     * @return Optional<Product>
      */
     @GetMapping("{id}")
     public Optional<Product> findProductById(@PathVariable Long id){
@@ -40,27 +41,14 @@ public class ProductController{
 
 
     /**
-     * Add a new product by parameters.
-     *
-     * @param productName The name of the product.
-     * @param price       The price of the product.
-     */
-    @PostMapping
-    public ResponseEntity<Product> addProduct(@RequestParam String productName, @RequestParam BigDecimal price){
-       return ResponseEntity.ok(productService.addProduct(productName, price));
-    }
-
-
-    /**
      * Add a new product by using a request body.
-     *
      * This method adds a product based on the provided request body
      * It should contain name and price of the product will be added.
      *
      * @body product    The body of the product.
-     * @return          A message indicating the success of the add operation.
+     * @return          A product added.
      */
-    @PostMapping("/addProductByBody")
+    @PostMapping("/addProduct")
     public ResponseEntity<Product> addProduct2(@RequestBody ProductDTO product){
         return ResponseEntity.ok(productService.addProductBody(product));
     }
@@ -74,9 +62,9 @@ public class ProductController{
      * It gives respond if product doesn't exist in the DB
      *
      * @param productDTO  product.
-     * @return            A message indicating the success of the update operation.
+     * @return            A product which is updated.
      */
-    @PutMapping("/updateProductByBody")
+    @PutMapping("/updateProduct")
     public ResponseEntity<Product> editProduct(@RequestBody ProductDTO productDTO) {
         return ResponseEntity.ok(productService.editProduct(productDTO));
     }

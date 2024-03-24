@@ -14,10 +14,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    /**
+     * Register a User.
+     *
+     * @return Optional<Product>
+     */
     @PostMapping("/register")
     public ResponseEntity<UserDTO> registration(@RequestBody UserDTO userDto){
         return ResponseEntity.ok(userService.registration(userDto));
     }
+
+    /**
+     * Login.
+     *
+     * @return Optional<Product>
+     */
     @PostMapping("/login")
     public ResponseEntity<UserDTO> login(@RequestBody UserDTO userDto){
         return ResponseEntity.ok(userService.login(userDto));
