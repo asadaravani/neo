@@ -1,0 +1,10 @@
+Vulnerabilities of the Week4 project
+Date: 24.03.2024
+Author: Beganov Asadbek
+
+1.  Added Spring Security
+    Impact: It improves the overall security of the project
+            by requiring authentication before accessing the resources
+
+2.  Implemented Password Encoding
+    Impact: Avoids exposure of passwords in requests
