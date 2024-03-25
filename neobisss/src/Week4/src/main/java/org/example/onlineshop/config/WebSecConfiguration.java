@@ -22,8 +22,8 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @Configuration
 @EnableWebSecurity
 public class WebSecConfiguration {
+
     private final JwtAuthFilter jwtAuthFilter;
-    //    private final CorsFilter corsFilter;
     private final UserRepository userRepo;
 
 
@@ -45,7 +45,6 @@ public class WebSecConfiguration {
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-        System.out.println("here");
 
         return http.build();
     }
@@ -60,7 +59,6 @@ public class WebSecConfiguration {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-//        return NoOpPasswordEncoder.getInstance(); // this is for testing purpose
         return new BCryptPasswordEncoder();
     }
 
@@ -74,7 +72,7 @@ public class WebSecConfiguration {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return userRepo.findUserByUsername(username).orElseThrow(() -> new UsernameNotFoundException("invalid credentials"));
+                return userRepo.findUserByName(username).orElseThrow(() -> new UsernameNotFoundException("invalid credentials"));
             }
         };
     }

@@ -19,11 +19,11 @@ import java.util.List;
 public class User implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    @NotBlank
+    @NotBlank @Column
     private String name;
-    @NotBlank
+    @NotBlank @Column
     private String surname;
-    @NotBlank
+    @NotBlank @Column
     private String password;
     @NotBlank @Column(unique = true)
     private String email;

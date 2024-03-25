@@ -40,7 +40,7 @@
 //                        .requestMatchers("/api/user/register", "/api/user/login").permitAll()
 //                        .anyRequest().authenticated()
 //                )
-//                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+//                //.sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
 //                .httpBasic(withDefaults());
 //        System.out.println("here");
 //        return http.build();
