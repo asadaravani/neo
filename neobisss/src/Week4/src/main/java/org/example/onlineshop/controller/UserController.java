@@ -3,6 +3,8 @@ package org.example.onlineshop.controller;
 import org.example.onlineshop.authen.AuthenticationResponse;
 import org.example.onlineshop.authen.LoginRequest;
 import org.example.onlineshop.authen.RegisterRequest;
+import org.example.onlineshop.exception.UserAlreadyExistsException;
+import org.example.onlineshop.exception.UserNotFoundException;
 import org.example.onlineshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +29,13 @@ public class UserController {
      * @return Optional<Product>
      */
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
-        return ResponseEntity.ok(userService.register(request));
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request){
+        try {
+            userService.register(request);
+        }catch (UserAlreadyExistsException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok().build();
     }
 
     /**
@@ -37,8 +44,14 @@ public class UserController {
      * @return Optional<Product>
      */
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest request){
-        return ResponseEntity.ok(userService.login(request));
+    public ResponseEntity<?> login(@RequestBody LoginRequest request){
+        AuthenticationResponse authenticationResponse;
+        try {
+            authenticationResponse = userService.login(request);
+        }catch (UserNotFoundException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok(authenticationResponse);
     }
 
 

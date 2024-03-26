@@ -3,7 +3,6 @@ package org.example.onlineshop.config;
 import lombok.RequiredArgsConstructor;
 import org.example.onlineshop.entity.User;
 import org.example.onlineshop.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

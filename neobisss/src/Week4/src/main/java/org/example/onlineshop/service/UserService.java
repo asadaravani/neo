@@ -7,12 +7,15 @@ import org.example.onlineshop.authen.LoginRequest;
 import org.example.onlineshop.authen.RegisterRequest;
 import org.example.onlineshop.entity.Role;
 import org.example.onlineshop.entity.User;
+import org.example.onlineshop.exception.UserAlreadyExistsException;
 import org.example.onlineshop.exception.UserNotFoundException;
 import org.example.onlineshop.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -23,7 +26,7 @@ public class UserService {
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request){
+    public void register(RegisterRequest request) throws UserAlreadyExistsException {
         var user = User.builder()
                 .name(request.getFirstname())
                 .surname(request.getLastname())
@@ -31,21 +34,23 @@ public class UserService {
                 .email(request.getEmail())
                 .role(Role.USER)
                 .build();
+        if(userRepository.findUserByEmail(request.getEmail()).isPresent()){
+            throw new UserAlreadyExistsException();
+        }
         userRepository.save(user);
-        var jwtToken = jwtUtil.generateToken(user.getEmail());
-        return AuthenticationResponse.builder().token(jwtToken).build();
     }
-    public AuthenticationResponse login(LoginRequest request){
+    public AuthenticationResponse login(LoginRequest request) throws UserNotFoundException{
+        User user = userRepository.findUserByEmail(request.getEmail())
+                .orElseThrow(UserNotFoundException::new);
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
                         request.getPassword()
                 )
         );
-        User user = userRepository.findUserByEmail(request.getEmail())
-                .orElseThrow(() -> new UserNotFoundException("User not found!"));
         String userEmail = user.getEmail();
         var jwtToken = jwtUtil.generateToken(userEmail);
+        System.out.println(jwtToken);
         return AuthenticationResponse.builder().token(jwtToken).build();
     }
 }
