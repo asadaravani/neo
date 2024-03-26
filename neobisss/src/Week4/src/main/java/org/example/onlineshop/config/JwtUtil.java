@@ -4,16 +4,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
-import java.util.Collection;
+import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-@Service
+@Component
 public class JwtUtil {
 
 
@@ -36,14 +34,13 @@ public class JwtUtil {
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
-    public String generateToken(String username, Collection<? extends GrantedAuthority> authorities) {
+    public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, username, authorities);
+        return createToken(claims, username);
     }
-    private String createToken(Map<String, Object> claims, String username, Collection<? extends GrantedAuthority> authorities) {
+    private String createToken(Map<String, Object> claims, String username) {
         return Jwts.builder().setClaims(claims).setSubject(username).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_DURATION_MILLISECONDS))
-//                .claim("authorities", authorities)
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
     public Boolean validateToken(String token, UserDetails userDetails) {

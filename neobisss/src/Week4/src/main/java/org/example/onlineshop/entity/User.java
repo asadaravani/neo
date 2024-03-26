@@ -3,6 +3,7 @@ package org.example.onlineshop.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
+@Builder
 @NoArgsConstructor
 @Entity
 public class User implements UserDetails {
@@ -27,8 +29,8 @@ public class User implements UserDetails {
     private String password;
     @NotBlank @Column(unique = true)
     private String email;
-
-   private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Override
     public boolean isAccountNonExpired() {
@@ -52,11 +54,12 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-
-        list.add(new SimpleGrantedAuthority(role));
-
-        return list;
+//        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+//
+//        list.add(new SimpleGrantedAuthority(role));
+//
+//        return list;
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override

@@ -43,7 +43,6 @@ public class WebSecConfiguration {
                         .requestMatchers("/api/user/register", "/api/user/login").permitAll()
                         .anyRequest().authenticated()
                 )
-                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -72,7 +71,7 @@ public class WebSecConfiguration {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return userRepo.findUserByName(username).orElseThrow(() -> new UsernameNotFoundException("invalid credentials"));
+                return userRepo.findUserByEmail(username).orElseThrow(() -> new UsernameNotFoundException("invalid credentials"));
             }
         };
     }

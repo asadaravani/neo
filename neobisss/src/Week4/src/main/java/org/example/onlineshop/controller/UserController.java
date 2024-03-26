@@ -1,6 +1,8 @@
 package org.example.onlineshop.controller;
 
-import org.example.onlineshop.dto.UserDTO;
+import org.example.onlineshop.authen.AuthenticationResponse;
+import org.example.onlineshop.authen.LoginRequest;
+import org.example.onlineshop.authen.RegisterRequest;
 import org.example.onlineshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+    private final UserService userService;
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
 
     /**
      * Register a User.
@@ -21,8 +27,8 @@ public class UserController {
      * @return Optional<Product>
      */
     @PostMapping("/register")
-    public ResponseEntity<UserDTO> registration(@RequestBody UserDTO userDto){
-        return ResponseEntity.ok(userService.registration(userDto));
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
+        return ResponseEntity.ok(userService.register(request));
     }
 
     /**
@@ -31,8 +37,8 @@ public class UserController {
      * @return Optional<Product>
      */
     @PostMapping("/login")
-    public ResponseEntity<UserDTO> login(@RequestBody UserDTO userDto){
-        return ResponseEntity.ok(userService.login(userDto));
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest request){
+        return ResponseEntity.ok(userService.login(request));
     }
 
 

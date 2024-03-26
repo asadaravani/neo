@@ -38,7 +38,6 @@ public class ProductService {
         }
         else{
             Product product = new Product();
-            product.setId(productDTO.getId());
             product.setProductName(productDTO.getProductName());
             product.setPrice(productDTO.getPrice());
             this.productRepository.save(product);
