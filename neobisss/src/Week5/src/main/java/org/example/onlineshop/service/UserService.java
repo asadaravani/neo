@@ -27,7 +27,7 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
 
     public void register(RegisterRequest request) throws UserAlreadyExistsException {
-        var user = User.builder()
+        User user = User.builder()
                 .name(request.getFirstname())
                 .surname(request.getLastname())
                 .password(encoder.encode(request.getPassword()))
