@@ -15,7 +15,6 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class ProductService {
-    @Autowired
     private ProductRepository productRepository;
     public List<Product> getAllProducts(){
         return this.productRepository.findAll();
@@ -27,9 +26,9 @@ public class ProductService {
         ProductDTO productDto = new ProductDTO();
         productDto.setProductName(productName);
         productDto.setPrice(price);
-        return addProductBody(productDto);
+        return addProduct(productDto);
     }
-    public Product addProductBody(ProductDTO productDTO){
+    public Product addProduct(ProductDTO productDTO){
         if(productDTO.getProductName().isEmpty() || productDTO.getProductName().equals(" ")){
             throw new EmptyFieldException("The field must not be empty!");
         }
@@ -44,7 +43,7 @@ public class ProductService {
             return product;
         }
     }
-    public Product editProduct(ProductDTO productDTO) {
+    public Product updateProduct(ProductDTO productDTO) {
         Optional<Product> product = productRepository.findById(productDTO.getId());
         if(product.isPresent()){
             Product updateProduct = product.get();

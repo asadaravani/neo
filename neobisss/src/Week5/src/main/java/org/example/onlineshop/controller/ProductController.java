@@ -14,8 +14,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/products")
 public class ProductController{
-    @Autowired
     ProductService productService;
+    @Autowired
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     /**
      * Get all products.
@@ -49,8 +52,8 @@ public class ProductController{
      * @return          A product added.
      */
     @PostMapping("/addProduct")
-    public ResponseEntity<Product> addProduct2(@RequestBody ProductDTO product){
-        return ResponseEntity.ok(productService.addProductBody(product));
+    public ResponseEntity<Product> addProduct(@RequestBody ProductDTO product){
+        return ResponseEntity.ok(productService.addProduct(product));
     }
 
 
@@ -65,8 +68,8 @@ public class ProductController{
      * @return            A product which is updated.
      */
     @PutMapping("/updateProduct")
-    public ResponseEntity<Product> editProduct(@RequestBody ProductDTO productDTO) {
-        return ResponseEntity.ok(productService.editProduct(productDTO));
+    public ResponseEntity<Product> updateProduct(@RequestBody ProductDTO productDTO) {
+        return ResponseEntity.ok(productService.updateProduct(productDTO));
     }
 
 
