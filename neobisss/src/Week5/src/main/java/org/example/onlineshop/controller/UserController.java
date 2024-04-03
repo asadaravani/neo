@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+    //http://localhost:8080/swagger-ui/index.html
     private final UserService userService;
     @Autowired
     public UserController(UserService userService) {

@@ -12,6 +12,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/products")
 public class ProductController{
+    //http://localhost:8080/swagger-ui/index.html
     ProductService productService;
     @Autowired
     public ProductController(ProductService productService) {
