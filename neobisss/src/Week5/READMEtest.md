@@ -1,4 +1,4 @@
-# neobis_ 
+# Week5_ 
 - You can use Postman to test endpoints
 - Also there are test to run
 - Or use terminal to run `mvn clean install`
