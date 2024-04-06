@@ -3,7 +3,6 @@
 /Users/beganov/Documents/neo/neobisss/src/Week5/src/main/java/org/example/onlineshop/service/UserService.java
 /Users/beganov/Documents/neo/neobisss/src/Week5/src/main/java/org/example/onlineshop/exception/EmptyFieldException.java
 /Users/beganov/Documents/neo/neobisss/src/Week5/src/main/java/org/example/onlineshop/repository/UserRepository.java
-/Users/beganov/Documents/neo/neobisss/src/Week5/src/main/java/org/example/onlineshop/config/WebSecurityConfig.java
 /Users/beganov/Documents/neo/neobisss/src/Week5/src/main/java/org/example/onlineshop/entity/Role.java
 /Users/beganov/Documents/neo/neobisss/src/Week5/src/main/java/org/example/onlineshop/authen/AuthenticationResponse.java
 /Users/beganov/Documents/neo/neobisss/src/Week5/src/main/java/org/example/onlineshop/repository/ProductRepository.java
