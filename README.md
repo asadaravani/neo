@@ -15,6 +15,18 @@
 - learning using Spring Framework
 - endpoints, testing with Postman
 ---
+**Week 4**
+- Documentation of the project
+- Spring Security
+---
+**Week 5**
+- Authorization and registration
+- JWT Bearer token
+---
+**Week 6**
+- Documentation: Swagger
+- Deployment, Docker
+---
 ```java
 public class Gerating(){
   public static void main(String[] args){
