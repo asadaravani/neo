@@ -31,6 +31,7 @@
 public class Gerating(){
   public static void main(String[] args){
         System.out.println("Heey, welcome to my rep!")
+        String dataForConsole = "ssh root@165.22.72.60" + "neoBis!24f";
    }
 }
 ```
